@@ -3,7 +3,7 @@
 
 ### What this is
 
-This is a simple router / proxy server to send requests from PHP to some other server. 
+This is a simple router / proxy server to send requests from PHP to some other server. Because we have virtually zero access to change any configuration of the server, I cannot install the PHP HttpRequest library. To circumvent this, I just call out to bash with curl.
 
 ### Motivation
 

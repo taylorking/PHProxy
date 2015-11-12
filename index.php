@@ -20,11 +20,8 @@
   foreach($paramsList as $value) {
     $paramString = $paramString . "$value/"; 
   }  
-  echo(shell_exec($command));
+  $response = shell_exec($command);
+  $response = json_decode($response);
 
 
-
-  function serializeRequestJSON($params) {
-  
-  }
 ?>
