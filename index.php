@@ -21,7 +21,10 @@
     $paramString = $paramString . "$value/"; 
   }  
   $response = shell_exec($command);
-  $response = json_decode($response);
-
+  $response = json_decode($response, true);
+  foreach($response['headers'] as $key => $value) {
+    header("$key: $value");
+  }
+  echo(json_encode($response['body']));
 
 ?>
