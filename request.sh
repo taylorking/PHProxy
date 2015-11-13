@@ -1,5 +1,7 @@
 #!/bin/bash
-echo curl -si -d "" --request $2 "$1" | sed 's/\r$//'
+H=$(echo "$3" | sed 's#"#\"#g')
+P=$(echo "$4" | sed 's#"#\\\"#g')
+echo curl -si $H -d \"$P\" --request $2 "$1" | sed 's/\r$//'
 head=true;
 while read -r line; do
     if $head; then 
@@ -11,7 +13,7 @@ while read -r line; do
     else 
       body+="$line"'\n'
     fi
-done < <(echo "$(curl -si -d "$4" --request $2 "$1" | sed 's/\r$//')")
+done < <(echo "$(curl -si $H -d "$P" --request $2 "$1" | sed 's/\r$//')")
 lineNum=0
 newHeaders+="{"
 while read -r line; do 

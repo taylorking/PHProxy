@@ -25,8 +25,7 @@
   }  
   echo $body;
   $headerString = get_curl_headers();
-  $command = "./request.sh " . ($forwardingAddress . $paramString) . " $method \"$headerString\" '$body'";
-  echo $command;
+  $command = "./request.sh " . ($forwardingAddress . $paramString) . " $method '$headerString' '$body'";
   $response = shell_exec($command);
   $response = json_decode($response, true); 
   foreach($response['headers'] as $key => $value) {
@@ -46,11 +45,11 @@
         continue; // Content Length was messing me up. If you need this write the code yourself.
       }
       if($i == 0) {
-        $headerString = "-H '$key:$value'";
+        $headerString = "-H \"$key:$value\"";
         $i++;
         continue;
       } else {
-        $headerString = "$headerString -H '$key:$value'";    
+        $headerString = "$headerString -H \"$key:$value\"";    
       }
     }
     return $headerString;
